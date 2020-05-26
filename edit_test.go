@@ -301,6 +301,9 @@ bar: y
 	out, _, err := transform.Bytes(yamled.T(
 		yamled.Node(foo).With(rep),
 	), []byte(src))
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	t.Logf("got:\n%s", out)
 
