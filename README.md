@@ -1,4 +1,4 @@
-[![](https://godoc.org/github.com/vmware-labs/go-yaml-edit?status.svg)](https://pkg.go.dev/github.com/vmware-labs/go-yaml-edit?tab=doc)
+[![](https://img.shields.io/static/v1?label=godev&message=reference&color=00add8)](https://pkg.go.dev/github.com/vmware-labs/go-yaml-edit?tab=doc)
 [![Go Report Card](https://goreportcard.com/badge/github.com/vmware-labs/go-yaml-edit)](https://goreportcard.com/report/github.com/vmware-labs/go-yaml-edit)
 ![](https://github.com/vmware-labs/go-yaml-edit/workflows/CI/badge.svg)
 
