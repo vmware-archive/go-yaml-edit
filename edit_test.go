@@ -8,8 +8,8 @@ import (
 	"log"
 	"testing"
 
-	yptr "github.com/vmware-labs/yaml-jsonpointer"
 	"github.com/vmware-labs/go-yaml-edit"
+	yptr "github.com/vmware-labs/yaml-jsonpointer"
 	"golang.org/x/text/transform"
 	"gopkg.in/yaml.v3"
 )
