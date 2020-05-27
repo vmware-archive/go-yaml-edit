@@ -61,7 +61,7 @@ type Transformer struct {
 
 // Transform implements the golang.org/x/text/transform.Transformer interface.
 func (t *Transformer) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) {
-	// This is implementation is suboptimal as it has to load the whole source in memory
+	// This implementation is suboptimal as it has to load the whole source in memory
 	// in order to create a line indent mapping.
 	// It's technically possible to keep track of line indentation information incrementally
 	// and thus have a minor optimization. Left as an excercise for the reader.
