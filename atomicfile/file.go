@@ -4,7 +4,7 @@
 /*
 Package atomicfile provides a simple API to atomically (over)write a file.
 
-The content is first written in a temporary file and only after the file is full written
+The content is first written in a temporary file and only after the file is fully written
 the old file is replaced by renaming the temporary file over it. The operation is atomic
 (i.e. every external process will either see the old file or the new file, never anything
 in between) if the temporary file lives on the same volume; this package takes care
