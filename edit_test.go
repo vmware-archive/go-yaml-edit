@@ -8,7 +8,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/vmware-labs/go-yaml-edit"
+	yamled "github.com/vmware-labs/go-yaml-edit"
 	yptr "github.com/vmware-labs/yaml-jsonpointer"
 	"golang.org/x/text/transform"
 	"gopkg.in/yaml.v3"
@@ -20,7 +20,7 @@ func ExampleT() {
 	src := `apiVersion: v1
 kind: Service
 metadata:
-  name: "foo"
+  name: "foo" # some comment
   namespace: myns
 `
 
@@ -50,7 +50,7 @@ metadata:
 	// apiVersion: v1
 	// kind: Service
 	// metadata:
-	//   name: "bar"
+	//   name: "bar" # some comment
 	//   namespace: otherns
 }
 
