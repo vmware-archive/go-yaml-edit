@@ -1,6 +1,17 @@
 // Copyright 2020 VMware, Inc.
 // SPDX-License-Identifier: BSD-2-Clause
 
+/*
+Package atomicfile provides a simple API to atomically (over)write a file.
+
+The content is first written in a temporary file and only after the file is fully written
+the old file is replaced by renaming the temporary file over it. The operation is atomic
+(i.e. every external process will either see the old file or the new file, never anything
+in between) if the temporary file lives on the same volume; this package takes care
+of picking a temporary file that lives in the same volume.
+
+Caveat: this package requires the file system rename(2) implementation to be atomic. Notably, this is not the case when using NFS with multiple clients: https://stackoverflow.com/a/41396801
+*/
 package atomicfile
 
 import (
@@ -54,7 +65,7 @@ func (a *AtomicWriter) Commit() error {
 	return os.Rename(a.Name(), a.filename)
 }
 
-// WriteFrom copies data from a read into a destination file identified by filename.
+// WriteFrom copies data from a reader into a destination file identified by filename.
 // If the file already exists, it's replaced atomically with the new content and the
 // original file permissions are preserved.
 func WriteFrom(filename string, r io.Reader, perm os.FileMode) error {
