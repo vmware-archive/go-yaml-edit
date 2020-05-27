@@ -64,7 +64,7 @@ func (t *Transformer) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, er
 	// This implementation is suboptimal as it has to load the whole source in memory
 	// in order to create a line indent mapping.
 	// It's technically possible to keep track of line indentation information incrementally
-	// and thus have a minor optimization. Left as an excercise for the reader.
+	// and thus have a minor optimization. Left as an exercise for the reader.
 
 	// let's load the whole buffer in memory.
 	if !atEOF {
