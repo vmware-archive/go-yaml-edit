@@ -15,7 +15,7 @@ import (
 )
 
 // ExampleT shows how to use the transformer to edit a YAML source in place.
-// It also shows how the quoting style is preserved
+// It also shows how the quoting style is preserved.
 func ExampleT() {
 	src := `apiVersion: v1
 kind: Service
@@ -28,6 +28,8 @@ metadata:
 	if err := yaml.Unmarshal([]byte(src), &root); err != nil {
 		log.Fatal(err)
 	}
+
+	// Let's find some nodes in the YAML tree using the YAML JSONPointer library yptr.
 	nameNode, err := yptr.Find(&root, "/metadata/name")
 	if err != nil {
 		log.Fatal(err)
