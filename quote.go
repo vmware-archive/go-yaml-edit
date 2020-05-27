@@ -49,7 +49,7 @@ func jsonMarshalString(value interface{}) (string, error) {
 	return string(b), nil
 }
 
-// yamlRoundTrip decodes and a string from YAML and reencodes it into YAML.
+// yamlRoundTrip decodes a string from YAML and reencodes it into YAML.
 func yamlRoundTrip(str string, indent int) (string, error) {
 	var parsed string
 	if err := yaml.Unmarshal([]byte(str), &parsed); err != nil {
