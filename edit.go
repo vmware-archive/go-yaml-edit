@@ -89,16 +89,7 @@ func (t *Transformer) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, er
 		}
 	}
 
-	nDst, nSrc, err = t.t.Transform(dst, src, atEOF)
-
-	l := 0
-	for i := 0; i < nSrc; i++ {
-		if src[i] == '\n' {
-			l++
-		}
-	}
-
-	return nDst, nSrc, err
+	return t.t.Transform(dst, src, atEOF)
 }
 
 // Reset implements the golang.org/x/text/transform.Transformer interface.
