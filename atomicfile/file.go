@@ -4,6 +4,9 @@
 /*
 Package atomicfile provides a simple API to atomically (over)write a file.
 
+Deprecated: Please use github.com/google/renameio and github.com/mkmik/filetransformer
+instead.
+
 The content is first written in a temporary file and only after the file is fully written
 the old file is replaced by renaming the temporary file over it. The operation is atomic
 (i.e. every external process will either see the old file or the new file, never anything
