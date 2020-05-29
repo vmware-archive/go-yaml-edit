@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/vmware-labs/go-yaml-edit/atomicfile"
+	"github.com/mkmik/filetransformer"
 	"github.com/vmware-labs/go-yaml-edit/splice"
 	"golang.org/x/text/transform"
 )
@@ -23,19 +23,28 @@ func ExampleOp() {
 	// splice.Op
 }
 
+// In order to splice a string you must provide one or more spans (character ranges)
+// and the replacement string for each span.
+// The resulting Transformer instance can then be passed to a collection of functions
+// that can apply transformers to their inputs.
+// See the documentation for the golang.org/x/text/transform for a full list.
+//
+// This example shows the simplest case where the input and output are plain Go strings.
 func Example() {
 	src := "abcd"
 
-	res, _, err := transform.String(splice.T(splice.Span(1, 2).With("B")), src)
+	res, _, err := transform.String(splice.T(splice.Span(1, 2).With("XYZ")), src)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(res)
 
 	// Output:
-	// aBcd
+	// aXYZcd
 }
 
+// All positions are character (rune) position, not bytes. This is an important
+// distinction when the input contains non-ASCII characters.
 func Example_unicode() {
 	src := "ábcd"
 
@@ -49,6 +58,9 @@ func Example_unicode() {
 	// áBcd
 }
 
+// Multiple substitutions are possible. All positions are interpreted as positions in the source stream.
+// The library deals with the fact that replacement strings can have different lengths than the strings
+// they replace and will behave accordingly.
 func Example_multiple() {
 	src := "abcd"
 
@@ -78,6 +90,8 @@ func Example_multiple() {
 	// aBaDa
 }
 
+// Inserting text is achieved by selecting a zero-width span, effectively acting
+// as a cursor inside the input stream.
 func Example_insert() {
 	src := "abcd"
 
@@ -92,6 +106,7 @@ func Example_insert() {
 	// abXcd
 }
 
+// Deletion is modeled by using an empty replacement string.
 func Example_delete() {
 	src := "abcd"
 
@@ -106,6 +121,9 @@ func Example_delete() {
 	// abd
 }
 
+// Applying a YAML edit on a byte slice can be achieved by applying a transformer
+// on an input byte slice using the transform.Bytes function of the
+// golang.org/x/text/transform package.
 func ExampleBytes() {
 	buf := []byte("abcd")
 
@@ -120,6 +138,8 @@ func ExampleBytes() {
 	// aBcd
 }
 
+// If you want to edit a file in-place, just use any library that can apply a Transformer
+// to a file, like for example the github.com/mkmik/filetransformer package.
 func Example_file() {
 	tmp, err := ioutil.TempFile("", "")
 	if err != nil {
@@ -131,7 +151,7 @@ func Example_file() {
 	tmp.Close()
 
 	t := splice.T(splice.Span(1, 3).With("X"))
-	if err := atomicfile.Transform(t, tmp.Name()); err != nil {
+	if err := filetransformer.Transform(t, tmp.Name()); err != nil {
 		log.Fatal(err)
 	}
 
