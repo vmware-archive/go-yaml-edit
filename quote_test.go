@@ -63,6 +63,9 @@ func TestQuote(t *testing.T) {
 		{"x: y\nbar: y\n", "|\n    x: y\n    bar: x\n", "|\n    x: y\n    bar: y", 2},
 		{"bar: y\n", "|\nbar: x\n", "|\n  bar: y", 0},
 		{"bar: y\n", "|\n    bar: x\n", "|\n    bar: y", 2},
+
+		{`a`, `""`, `"a"`, 0},
+		{`a`, `''`, `'a'`, 0},
 	}
 
 	for i, tc := range testCases {

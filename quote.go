@@ -30,7 +30,7 @@ func quote(value, old string, indent int) (res string, err error) {
 			if err != nil {
 				return "", err
 			}
-			if reEncoded[0] != q {
+			if len(reEncoded) == 0 || reEncoded[0] != q {
 				if q == '"' {
 					return jsonMarshalString(value)
 				}
