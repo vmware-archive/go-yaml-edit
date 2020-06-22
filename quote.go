@@ -25,11 +25,16 @@ func quote(value, old string, indent int) (res string, err error) {
 	indent += 2
 	if len(old) > 0 {
 		q := old[0]
+		reEncoded, err := yamlRoundTrip(old, indent)
+		if err != nil {
+			return "", err
+		}
+		if strings.HasPrefix(reEncoded, `"`) {
+			// if the original value had to be quoted if it was a string it means it wasn't
+			// a string.
+			return value, nil
+		}
 		if q == '"' || q == '\'' {
-			reEncoded, err := yamlRoundTrip(old, indent)
-			if err != nil {
-				return "", err
-			}
 			if len(reEncoded) == 0 || reEncoded[0] != q {
 				if q == '"' {
 					return jsonMarshalString(value)

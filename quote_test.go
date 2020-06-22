@@ -66,6 +66,9 @@ func TestQuote(t *testing.T) {
 
 		{`a`, `""`, `"a"`, 0},
 		{`a`, `''`, `'a'`, 0},
+
+		{"1", "0", `1`, 0},
+		{"true", "false", `true`, 0},
 	}
 
 	for i, tc := range testCases {
