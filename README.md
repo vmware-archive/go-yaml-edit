@@ -1,3 +1,14 @@
+# WARNING: This repository is no longer actively maintained by VMware.
+
+VMware has made the difficult decision to stop driving this project and therefore we will no longer actively respond
+to issues or pull requests. If you would like to take over maintaining this project independently from VMware, please
+let us know so we can add a link to your forked project here.
+
+Thank You.
+
+#
+#
+
 [![](https://img.shields.io/static/v1?label=godev&message=reference&color=00add8)](https://pkg.go.dev/github.com/vmware-labs/go-yaml-edit?tab=doc)
 [![Go Report Card](https://goreportcard.com/badge/github.com/vmware-labs/go-yaml-edit)](https://goreportcard.com/report/github.com/vmware-labs/go-yaml-edit)
 ![](https://github.com/vmware-labs/go-yaml-edit/workflows/CI/badge.svg)
